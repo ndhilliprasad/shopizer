@@ -14,3 +14,9 @@
 /SALESMANAGER.h2.db/
 /SALESMANAGER.lock.db/
 */sm-shop/**
+
+**/bin
+**/build
+**/.settings
+**/.gradle
+**/.classpath

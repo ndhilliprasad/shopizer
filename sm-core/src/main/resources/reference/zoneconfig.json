@@ -939,7 +939,187 @@
 		"zoneCode": "WAAU",
 		"zoneName": "Western Australia",
 		"countryCode": "AU"
-	} 
+	},
+    {
+        "zoneCode":"IN-AN",
+        "zoneName":"Andaman and Nicobar Islands",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-AP",
+        "zoneName":"Andhra Pradesh",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-AR",
+        "zoneName":"Arunachal Pradesh",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-AS",
+        "zoneName":"Assam",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-BR",
+        "zoneName":"Bihar",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-CG",
+        "zoneName":"Chandigarh",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-CH",
+        "zoneName":"Chhattisgarh",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-DH",
+        "zoneName":"Dadra and Nagar Haveli",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-DD",
+        "zoneName":"Daman and Diu",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-DL",
+        "zoneName":"Delhi",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-GA",
+        "zoneName":"Goa",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-GJ",
+        "zoneName":"Gujarat",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-HR",
+        "zoneName":"Haryana",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-HP",
+        "zoneName":"Himachal Pradesh",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-JK",
+        "zoneName":"Jammu and Kashmir",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-JH",
+        "zoneName":"Jharkhand",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-KA",
+        "zoneName":"Karnataka",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-KL",
+        "zoneName":"Kerala",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-LD",
+        "zoneName":"Lakshadweep",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-MP",
+        "zoneName":"Madhya Pradesh",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-MH",
+        "zoneName":"Maharashtra",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-MN",
+        "zoneName":"Manipur",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-ML",
+        "zoneName":"Meghalaya",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-MZ",
+        "zoneName":"Mizoram",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-NL",
+        "zoneName":"Nagaland",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-OR",
+        "zoneName":"Odisha",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-PY",
+        "zoneName":"Puducherry",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-PB",
+        "zoneName":"Punjab",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-RJ",
+        "zoneName":"Rajasthan",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-SK",
+        "zoneName":"Sikkim",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-TN",
+        "zoneName":"Tamil Nadu",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-TS",
+        "zoneName":"Telangana",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-TR",
+        "zoneName":"Tripura",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-UK",
+        "zoneName":"Uttar Pradesh",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-UP",
+        "zoneName":"Uttarakhand",
+        "countryCode":"IN"
+    },
+    {
+        "zoneCode":"IN-WB",
+        "zoneName":"West Bengal",
+        "countryCode":"IN"
+    }	 
 ]  ,
 
   "fr":[
@@ -1882,7 +2062,186 @@
 		"zoneCode":"NSW",
 		"zoneName":"Nouvelle-Galles du Sud",
 		"countryCode":"AU"
-	}
-
+	},
+	{
+    	"zoneCode": "IN-AN",
+	    "zoneName": "Les îles Andaman et Nicobar",
+	    "CountryCode": "IN"
+  	},
+  	{
+    	"zoneCode": "IN-AP",
+	    "zoneName": "Andhra Pradesh",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-AR",
+	    "zoneName": "Arunachal Pradesh",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-AS",
+	    "zoneName": "Assam",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-BR",
+	    "zoneName": "Bihar",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-CG",
+	    "zoneName": "Chandigarh",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-CH",
+	    "zoneName": "Chhattisgarh",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-DH",
+	    "zoneName": "Dadra et Nagar Haveli",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-DD",
+	    "zoneName": "Daman et Diu",
+	    "CountryCode": "IN"
+  	},
+  	{
+    	"zoneCode": "IN-DL",
+    	"zoneName": "Delhi",
+    	"CountryCode": "IN"
+  	},
+  	{
+    	"zoneCode": "IN-GA",
+    	"zoneName": "Goa",
+    	"CountryCode": "IN"
+  	},
+  	{
+    	"zoneCode": "IN-GJ",
+    	"zoneName": "Gujarat",
+    	"CountryCode": "IN"
+  	},
+  	{
+    	"zoneCode": "IN-HR",
+	    "zoneName": "Haryana",
+    	"CountryCode": "IN"
+  	},
+  	{
+    	"zoneCode": "IN-HP",
+    	"zoneName": "Himachal Pradesh",
+    	"CountryCode": "IN"
+  	},
+  	{
+    	"zoneCode": "IN-JK",
+    	"zoneName": "Jammu et Cachemire",
+    	"CountryCode": "IN"
+  	},
+  	{
+    	"zoneCode": "IN-JH",
+    	"zoneName": "Jharkhand",
+    	"CountryCode": "IN"
+  	},
+  	{
+    	"zoneCode": "IN-KA",
+    	"zoneName": "Karnataka",
+    	"CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-KL",
+	    "zoneName": "Kerala",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-LD",
+	    "zoneName": "Lakshadweep",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-MP",
+	    "zoneName": "Madhya Pradesh",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-MH",
+	    "zoneName": "Maharashtra",
+	    "CountryCode": "IN"
+  	},
+  	{
+    	"zoneCode": "IN-MN",
+	    "zoneName": "Manipur",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-ML",
+	    "zoneName": "Meghalaya",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-MZ",
+	    "zoneName": "Mizoram",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-NL",
+	    "zoneName": "Nagaland",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-OU",
+	    "zoneName": "Odisha",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-PY",
+	    "zoneName": "Puducherry",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-PB",
+	    "zoneName": "Punjab",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-RJ",
+	    "zoneName": "Rajasthan",
+	    "CountryCode": "IN"
+  	},
+  	{
+    	"zoneCode": "IN-SK",
+	    "zoneName": "Sikkim",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-TN",
+	    "zoneName": "Tamil Nadu",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-TS",
+	    "zoneName": "Telangana",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-TR",
+	    "zoneName": "Tripura",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-Royaume-Uni",
+	    "zoneName": "Uttar Pradesh",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-UP",
+	    "zoneName": "Uttarakhand",
+	    "CountryCode": "IN"
+  	},
+  	{
+	    "zoneCode": "IN-WB",
+	    "zoneName": "Bengale occidental",
+	    "CountryCode": "IN"
+  	}
 ] 
 }
