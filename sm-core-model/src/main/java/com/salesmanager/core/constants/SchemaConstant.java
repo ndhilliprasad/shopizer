@@ -57,6 +57,8 @@ public class SchemaConstant {
 	 */
 	public static final HashMap<String, String> CURRENCY_MAP = new HashMap<String, String>();
 	
+	public static final HashMap<String, String> CURRENCY_SYMBOL_OVERRIDE_MAP = new HashMap<String, String>();
+	
 	static {
 		CURRENCY_MAP.put("AFN", "Afghani");
 		CURRENCY_MAP.put("EUR", "Euro");
@@ -268,6 +270,7 @@ public class SchemaConstant {
 		//CURRENCY_MAP.put("ZWL", "Zimbabwe Dollar");
 		
 
+		CURRENCY_SYMBOL_OVERRIDE_MAP.put("INR", "₹");
 
 	}
 }

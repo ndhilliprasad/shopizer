@@ -1,6 +1,8 @@
 package com.salesmanager.core.business.utils;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Currency;
@@ -240,6 +242,13 @@ public class ProductPriceUtils {
 		
 		if(store.isCurrencyFormatNational()) {
 			currencyInstance = NumberFormat.getCurrencyInstance(locale);//national
+			
+			if (StringUtils.isNotBlank(store.getCurrency().getCurrencySymbolOverride())) {
+				DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols(locale);
+				decimalFormatSymbols.setCurrencySymbol(store.getCurrency().getCurrencySymbolOverride());
+				((DecimalFormat) currencyInstance).setDecimalFormatSymbols(decimalFormatSymbols);
+			}
+			
 		} else {
 			currencyInstance = NumberFormat.getCurrencyInstance();//international
 		}

@@ -38,6 +38,9 @@ public class Currency extends SalesManagerEntity<Long, Currency> implements Seri
 	@Column(name = "CURRENCY_NAME", unique = true)
 	private String name;
 	
+	@Column(name = "CURRENCY_SYMBOL_OVERRIDE")
+	private String currencySymbolOverride;
+	
 	public Currency() {
 	}
 	
@@ -85,6 +88,14 @@ public class Currency extends SalesManagerEntity<Long, Currency> implements Seri
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getCurrencySymbolOverride() {
+		return currencySymbolOverride;
+	}
+
+	public void setCurrencySymbolOverride(String currencySymbolOverride) {
+		this.currencySymbolOverride = currencySymbolOverride;
 	}
 
 }

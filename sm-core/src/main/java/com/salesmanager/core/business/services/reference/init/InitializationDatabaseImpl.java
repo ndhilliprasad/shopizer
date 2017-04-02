@@ -120,6 +120,10 @@ public class InitializationDatabaseImpl implements InitializationDatabase {
 	            	Currency currency = new Currency();
 	            	currency.setName(c.getCurrencyCode());
 	            	currency.setCurrency(c);
+	            	
+				if (SchemaConstant.CURRENCY_SYMBOL_OVERRIDE_MAP.containsKey(code)) {
+					currency.setCurrencySymbolOverride(SchemaConstant.CURRENCY_SYMBOL_OVERRIDE_MAP.get(code));
+				}
 	            	currencyService.create(currency);
 
             //System.out.println(l.getCountry() + "   " + c.getSymbol() + "  " + c.getSymbol(l));
