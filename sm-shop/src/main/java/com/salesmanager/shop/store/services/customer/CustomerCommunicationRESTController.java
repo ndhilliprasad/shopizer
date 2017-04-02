@@ -19,7 +19,7 @@ import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.shop.store.controller.customer.facade.CustomerFacade;
-import com.salesmanager.shop.store.model.optinnewsletter.OptinCustomerDTO;
+//import com.salesmanager.shop.store.model.optinnewsletter.OptinCustomerDTO;
 
 
 @RestController
@@ -34,7 +34,7 @@ public class CustomerCommunicationRESTController {
 	/**
 	 * Store the email of the customer for the newsletter
 	 */
-	@RequestMapping( value="/customer/optin.html", method=RequestMethod.POST)
+/*	@RequestMapping( value="/customer/optin.html", method=RequestMethod.POST)
 	public @ResponseBody ResponseEntity<String> createOptin(@RequestBody final OptinCustomerDTO optin, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		AjaxResponse resp = new AjaxResponse();
@@ -60,5 +60,5 @@ public class CustomerCommunicationRESTController {
 		}
 
 
-	}
+	}*/
 }

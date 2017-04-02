@@ -38,7 +38,7 @@ import com.salesmanager.shop.model.customer.CustomerEntity;
 import com.salesmanager.shop.model.customer.PersistableCustomer;
 import com.salesmanager.shop.model.customer.ReadableCustomer;
 import com.salesmanager.shop.populator.customer.*;
-import com.salesmanager.shop.store.model.optinnewsletter.OptinCustomerDTO;
+//import com.salesmanager.shop.store.model.optinnewsletter.OptinCustomerDTO;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
@@ -482,7 +482,7 @@ public class CustomerFacadeImpl implements CustomerFacade
            customerModel= billingAddressPopulator.populate( address, customerModel, merchantStore, merchantStore.getDefaultLanguage() );
            customerModel.getBilling().setCountry( country );
            if(StringUtils.isNotBlank( address.getZone() )){
-               Zone zone = zoneService.getByCode(address.getZone());
+               Zone zone = zoneService.getByCode(address.getZone(), country);
                if(zone==null) {
                   throw new ConversionException("Unsuported zone code " + address.getZone());
                }
@@ -500,7 +500,7 @@ public class CustomerFacadeImpl implements CustomerFacade
            customerModel= shippingAddressPopulator.populate( address, customerModel, merchantStore, merchantStore.getDefaultLanguage() );
            customerModel.getDelivery().setCountry( country );
            if(StringUtils.isNotBlank( address.getZone() )){
-               Zone zone = zoneService.getByCode(address.getZone());
+               Zone zone = zoneService.getByCode(address.getZone(), country);
                if(zone==null) {
                    throw new ConversionException("Unsuported zone code " + address.getZone());
                }
@@ -563,7 +563,7 @@ public class CustomerFacadeImpl implements CustomerFacade
 	}
 
 
-	@Override
+	/*@Override
 	public void createCustomerOptin(OptinCustomerDTO customerOptin) throws Exception {
 		Optin optin = optinService.findByCode(customerOptin.getOptinCode());
 		CustomerOptin customerOptinModel = new CustomerOptin();
@@ -574,7 +574,7 @@ public class CustomerFacadeImpl implements CustomerFacade
 		customerOptinModel.setOptinDate(new Date());
 		customerOptinService.create(customerOptinModel);
 		
-	}
+	}*/
 
 
 }

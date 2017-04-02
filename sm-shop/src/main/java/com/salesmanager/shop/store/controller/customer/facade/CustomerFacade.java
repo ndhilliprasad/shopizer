@@ -12,7 +12,7 @@ import com.salesmanager.shop.model.customer.Address;
 import com.salesmanager.shop.model.customer.CustomerEntity;
 import com.salesmanager.shop.model.customer.PersistableCustomer;
 import com.salesmanager.shop.model.customer.ReadableCustomer;
-import com.salesmanager.shop.store.model.optinnewsletter.OptinCustomerDTO;
+//import com.salesmanager.shop.store.model.optinnewsletter.OptinCustomerDTO;
 
 /**
  * <p>Customer facade working as a bridge between {@link CustomerService} and Controller
@@ -85,7 +85,7 @@ public interface CustomerFacade
 	Customer populateCustomerModel(Customer customerModel, PersistableCustomer customer,
 			MerchantStore merchantStore, Language language) throws Exception;
 	
-    void createCustomerOptin(OptinCustomerDTO customerOptin) throws Exception;
+    //void createCustomerOptin(OptinCustomerDTO customerOptin) throws Exception;
 
 
 	
