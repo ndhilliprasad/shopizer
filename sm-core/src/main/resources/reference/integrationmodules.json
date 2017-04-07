@@ -93,6 +93,17 @@
 		"image":"stripe.png",
 		"configuration":[{"env":"TEST","scheme":"https","host":"www.stripe.com","port":"443","uri":"/"},{"env":"PROD","scheme":"https","host":"www.stripe.com","port":"443","uri":"/"}]
 
+	},
+	
+	{
+		"module": "PAYMENT",
+		"code": "instamojo",
+		"type":"instamojo",
+		"version":"",
+		"regions": ["IN"],
+		"image":"instamojo.png",
+		"configuration":[{"env":"TEST","scheme":"","host":"","port":"","uri":"","config1":"https://test.instamojo.com/v2","config2":"https://test.instamojo.com/oauth2/token/"},{"env":"PROD","scheme":"","host":"","port":"","uri":"","config1":"https://www.instamojo.com/v2/","config2":"https://www.instamojo.com/oauth2/token/"}]
+
 	}
 
 ] 

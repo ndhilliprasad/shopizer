@@ -1,5 +1,8 @@
 package com.salesmanager.shop.store.controller.order;
 
+import com.instamojo.wrapper.model.Payment;
+import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.core.business.modules.integration.payment.impl.InstamojoPayment;
 import com.salesmanager.core.business.modules.integration.payment.impl.PayPalExpressCheckoutPayment;
 import com.salesmanager.core.business.services.catalog.product.PricingService;
 import com.salesmanager.core.business.services.customer.CustomerService;
@@ -16,6 +19,7 @@ import com.salesmanager.core.business.utils.CoreConfiguration;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.order.OrderTotalSummary;
+import com.salesmanager.core.model.payments.BasicPayment;
 import com.salesmanager.core.model.payments.PaypalPayment;
 import com.salesmanager.core.model.payments.Transaction;
 import com.salesmanager.core.model.reference.language.Language;
@@ -23,14 +27,17 @@ import com.salesmanager.core.model.shipping.ShippingSummary;
 import com.salesmanager.core.model.shoppingcart.ShoppingCartItem;
 import com.salesmanager.core.model.system.IntegrationConfiguration;
 import com.salesmanager.core.model.system.IntegrationModule;
+import com.salesmanager.core.modules.integration.IntegrationException;
 import com.salesmanager.core.modules.integration.payment.model.PaymentModule;
 import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.shop.model.customer.PersistableCustomer;
 import com.salesmanager.shop.model.order.ShopOrder;
 import com.salesmanager.shop.store.controller.AbstractController;
 import com.salesmanager.shop.store.controller.order.facade.OrderFacade;
 import com.salesmanager.shop.store.controller.shoppingCart.facade.ShoppingCartFacade;
 import com.salesmanager.shop.utils.LabelUtils;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -219,6 +226,21 @@ public class ShoppingOrderPaymentController extends AbstractController {
 							
 					
 				}
+				else if (paymentmethod.equals("INSTAMOJO")) {
+					Transaction transaction = getInstamojoInitTransaction(order, store, config, integrationModule,
+							orderTotalSummary);
+					
+					transactionService.create(transaction);
+					
+					super.setSessionAttribute(Constants.INIT_TRANSACTION_KEY, transaction, request);				
+					String paymentUrl = transaction.getTransactionDetails().get(InstamojoPayment.PAYMENT_URL);
+					
+					ajaxResponse.addEntry("url", paymentUrl);
+					super.setSessionAttribute(Constants.ORDER, order, request);
+					ajaxResponse.setStatus(AjaxResponse.RESPONSE_OPERATION_COMPLETED);
+
+				}
+				
 			}
 		
 		} catch(Exception e) {
@@ -239,6 +261,43 @@ public class ShoppingOrderPaymentController extends AbstractController {
 		} else {//process as cancel
 			return "redirect:" + Constants.SHOP_URI + "/order/checkout.html";
 		}	
+	}
+	
+	@RequestMapping(value = { "/instamojo/checkout.html" }, method = RequestMethod.GET)
+	public String returnInstamojoPayment(@RequestParam("transaction_id") String transactionId,
+			@RequestParam("payment_id") String paymentId,
+			HttpServletRequest request, HttpServletResponse response, Locale locale)
+			throws Exception {
+		
+		Transaction initTransaction = super.getSessionAttribute(Constants.INIT_TRANSACTION_KEY, request);
+		
+		if (initTransaction.getTransactionDetails().get(InstamojoPayment.TRANSACTION_ID).equals(transactionId) &&
+				StringUtils.isNotBlank(paymentId)) {
+			return "redirect:" + Constants.SHOP_URI + "/order/commitPreAuthorized.html";
+		} else {// process as cancel
+			return "redirect:" + Constants.SHOP_URI + "/order/checkout.html";
+		}
+	}
+	
+	private Transaction getInstamojoInitTransaction(ShopOrder order, MerchantStore store, IntegrationConfiguration config,
+			IntegrationModule integrationModule, OrderTotalSummary orderTotalSummary)
+			throws ServiceException, IntegrationException {
+		InstamojoPayment instamojoPayment = (InstamojoPayment)paymentService.getPaymentModule("instamojo");
+		
+		BasicPayment payment = new BasicPayment();
+		Map<String,String> paymentMetaData = new HashMap<>();
+		PersistableCustomer customer = order.getCustomer();
+		
+		StringBuilder builder = new StringBuilder(customer.getBilling().getFirstName()).append(' ')
+				.append(customer.getBilling().getLastName());
+		
+		paymentMetaData.put("name", builder.toString());
+		paymentMetaData.put("email", customer.getEmailAddress());
+		paymentMetaData.put("phone", customer.getBilling().getPhone());
+		payment.setCurrency(store.getCurrency());
+		payment.setPaymentMetaData(paymentMetaData);
+		
+		return instamojoPayment.initInstamojoTransaction(store, orderTotalSummary.getTotal(), payment, config, integrationModule);
 	}
 
 }

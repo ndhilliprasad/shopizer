@@ -115,7 +115,7 @@ public class ModuleConfigurationServiceImpl extends
 		            			config.setConfig1((String)values.get("config1"));
 		            		}
 		            		if((String)values.get("config2")!=null) {
-		            			config.setConfig1((String)values.get("config2"));
+		            			config.setConfig2((String)values.get("config2"));
 		            		}
 		            		
 		            		moduleConfigs.put(env, config);

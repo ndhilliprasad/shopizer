@@ -390,21 +390,25 @@ public class OrderFacadeImpl implements OrderFacade {
 				((com.salesmanager.core.model.payments.PaypalPayment)payment).setPayerId(transaction.getTransactionDetails().get("PAYERID"));
 				((com.salesmanager.core.model.payments.PaypalPayment)payment).setPaymentToken(transaction.getTransactionDetails().get("TOKEN"));
 				
-				
 			}
 			
+			if (PaymentType.INSTAMOJO.name().equals(paymentType)) {
+				if (transaction == null) {
+					throw new ServiceException("payment.error");
+				}
+
+				payment = new InstamojoPayment();
+
+				((InstamojoPayment) payment).setTransactionId(transaction.getTransactionDetails()
+						.get(com.salesmanager.core.business.modules.integration.payment.impl.InstamojoPayment.TRANSACTION_ID));
+			}
 
 			modelOrder.setPaymentModuleCode(order.getPaymentModule());
 			payment.setModuleName(order.getPaymentModule());
 
-			if(transaction!=null) {
-				orderService.processOrder(modelOrder, customer, order.getShoppingCartItems(), summary, payment, store);
-			} else {
-				orderService.processOrder(modelOrder, customer, order.getShoppingCartItems(), summary, payment, transaction, store);
-			}
-			
+			orderService.processOrder(modelOrder, customer, order.getShoppingCartItems(), summary, payment, transaction,
+					store);
 
-			
 			return modelOrder;
 		
 		} catch(ServiceException se) {//may be invalid credit card

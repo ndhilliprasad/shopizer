@@ -36,6 +36,7 @@
     			<beans:entry key="paypal-express-checkout" value-ref="paypal-ec"/>
     			<beans:entry key="moneyorder" value-ref="moneyorder"/>
     			<beans:entry key="stripe" value-ref="stripe"/>
+    			<beans:entry key="instamojo" value-ref="instamojo"/>
     </util:map>
 
 	<!-- Shipping -->
@@ -69,6 +70,8 @@
 		class="com.salesmanager.core.business.modules.integration.payment.impl.PayPalExpressCheckoutPayment"/>
 	<beans:bean id="stripe"
 		class="com.salesmanager.core.business.modules.integration.payment.impl.StripePayment"/>
+	<beans:bean id="instamojo"
+		class="com.salesmanager.core.business.modules.integration.payment.impl.InstamojoPayment"/>
 
 
 

@@ -474,7 +474,14 @@ function bindActions() {
 		else if(paymentSelection.indexOf('beanstream') >= 0) {
 			//console.log('Beanstream ');
 			$('#paymentMethodType').val('CREDITCARD');
-		} else {
+		}
+		else if(paymentSelection.indexOf('instamojo') >= 0) {
+			
+			//console.log('PP ');
+			$('#paymentMethodType').val('INSTAMOJO');
+			initPayment('INSTAMOJO');
+		}
+		else {
 			//submit form
 			console.log('Checkout ');
 			$('#pageContainer').hideLoading();
@@ -1297,7 +1304,7 @@ $(document).ready(function() {
 												    			<li class="<c:choose><c:when test="${order.paymentMethodType!=null && order.paymentMethodType==paymentMethod.paymentType}">active</c:when><c:otherwise><c:if test="${order.paymentMethodType==null && paymentMethod.defaultSelected==true}">active</c:if></c:otherwise></c:choose>">
 												    				<a href="#${paymentMethod.paymentType}" data-toggle="tab" class="paymentTab" onClick="setPaymentModule('${paymentMethod.paymentMethodCode}');">
 												    					<c:choose>
-												    						<c:when test="${paymentMethod.paymentType=='CREDITCARD' || paymentMethod.paymentType=='PAYPAL'}">
+												    						<c:when test="${paymentMethod.paymentType=='CREDITCARD' || paymentMethod.paymentType=='PAYPAL' || paymentMethod.paymentType=='INSTAMOJO' }">
 												    							<c:if test="${paymentMethod.paymentType=='CREDITCARD'}">
 												    								<p id="cc-img-container">
 												    									<img src="<c:url value="/resources/img/payment/icons/visa-straight-64px.png"/>" width="40" style="display:inline-block;">
@@ -1306,6 +1313,7 @@ $(document).ready(function() {
 												    								</p>
 												    							</c:if>
 												    							<c:if test="${paymentMethod.paymentType=='PAYPAL'}"><img src="<c:url value="/resources/img/payment/icons/paypal-straight-64px.png"/>" width="40"></c:if>
+												    							<c:if test="${paymentMethod.paymentType=='INSTAMOJO'}"><img src="<c:url value="/resources/img/payment/icons/instamojo.png"/>" width="80"></c:if>
 												    						</c:when>
 												    						<c:otherwise>
 												    							<h4><s:message code="payment.type.${paymentMethod.paymentType}" text="Payment method type [payment.type.${paymentMethod.paymentType}] not defined in payment.properties" /></h4>
