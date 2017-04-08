@@ -14,7 +14,9 @@ response.setDateHeader ("Expires", -1);
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
  
-
+ <script src="<c:url value="/resources/js/jquery.easing.1.3.js" />"></script>
+ <script src="<c:url value="/resources/js/jquery.quicksand.js" />"></script>
+ <script src="<c:url value="/resources/js/jquery-sort-filter-plugin.js" />"></script>
  
  <script>
  
@@ -23,13 +25,56 @@ response.setDateHeader ("Expires", -1);
  
 
  $(function(){
-	 	 
+	
+	 $('#filter').on('change', function() {
+		    var orderBy = getOrderBy();
+		    orderProducts(orderBy);
+	 });
+	 
 	 search();
 
  });
  
  
 	<jsp:include page="/pages/shop/templates/bootstrap/sections/shop-listing.jsp" />
+	
+		function orderProducts(attribute) {
+		
+		
+		  if(attribute=='item-order') {
+			  return;
+		  }
+		
+		  // get the first collection
+		  var $prods = $('#productsContainer');
+
+		  // clone applications to get a second collection
+		  var $data = $prods.clone();
+		  
+		  var $filteredData = $data.find('li');
+	      var $sortedData = $filteredData.sorted({
+		        by: function(v) {
+		        	if(attribute=='item-price') {
+		        		return parseFloat($(v).attr(attribute));
+		        	} else {
+		        		return $(v).attr(attribute);
+		        	}
+		        }
+		  });
+
+		  // finally, call quicksand
+		  $prods.quicksand($sortedData, {
+		      duration: 800,
+		      easing: 'easeInOutQuad'
+		  });
+		
+		
+	}
+	
+	function getOrderBy() {
+		var orderBy = $("#filter").val();
+		return orderBy;
+	}
 	 
  
  	function search() {
