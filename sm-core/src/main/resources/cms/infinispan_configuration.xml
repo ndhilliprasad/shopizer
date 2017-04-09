@@ -22,7 +22,7 @@
 		       <store class="org.infinispan.persistence.file.SingleFileStore" fetchPersistentState="false"
 	               ignoreModifications="false" purgeOnStartup="false" shared="false" preload="false">
 	               <properties>
-	                 <property name="location" value="./files/store"/>
+	                 <property name="location" value="/var/files/store"/>
 	               </properties>
 	          </store>
 	          	
@@ -44,7 +44,7 @@
 	          <store class="org.infinispan.persistence.file.SingleFileStore" fetchPersistentState="false"
 	               ignoreModifications="false" purgeOnStartup="false" shared="false" preload="false">
 	            <properties>
-	                 <property name="location" value="./files/repos"/>
+	                 <property name="location" value="/var/files/repos"/>
 	               </properties>
 	          </store>
 	     </persistence>
