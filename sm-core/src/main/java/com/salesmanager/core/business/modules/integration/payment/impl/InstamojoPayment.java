@@ -192,7 +192,7 @@ public class InstamojoPayment implements PaymentModule {
 		order.setPhone(paymentMetaData.get("phone"));
 		order.setCurrency(payment.getCurrency().getCode());
 		order.setAmount(amount.doubleValue());
-		order.setDescription("This is a test transaction.");
+		order.setDescription(store.getStorename());
 
 		StringBuilder returnUrl = new StringBuilder().append(coreConfiguration.getProperty("SHOP_SCHEME", "http"))
 				.append("://").append(store.getDomainName())
