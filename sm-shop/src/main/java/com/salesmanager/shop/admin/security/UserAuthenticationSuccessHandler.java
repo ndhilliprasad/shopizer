@@ -54,11 +54,8 @@ public class UserAuthenticationSuccessHandler extends
 			  
 			  userService.saveOrUpdate(user);
 			  
-			  //response.sendRedirect(request.getContextPath() + "/admin/home.html");
-			  redirectStrategy.sendRedirect(request, response, request.getContextPath() + "/admin/home.html");
-			  
-		  
-		  
+			  redirectStrategy.sendRedirect(request, response, "/admin/home.html");
+	  
 		  } catch (Exception e) {
 			  LOGGER.error("User authenticationSuccess",e);
 		  }
