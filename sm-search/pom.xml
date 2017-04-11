@@ -29,7 +29,7 @@
 		
 
 		<org.elasticsearch-version>2.4.1</org.elasticsearch-version>
-		<io.searchbox.jest-version>2.0.3</io.searchbox.jest-version>
+		<io.searchbox.jest-version>2.4.0</io.searchbox.jest-version>
         
         
         
