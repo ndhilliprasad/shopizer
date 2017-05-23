@@ -47,7 +47,7 @@
 	<beans:bean id="messages" class="com.salesmanager.shop.utils.LabelUtils"/>
 	
 	<!-- load images from local web server [com.salesmanager.web.utils.LocalImageFilePathUtils] -->
-	<beans:bean id="img" class="com.salesmanager.shop.utils.LocalImageFilePathUtils">
+	<beans:bean id="img" class="com.salesmanager.shop.utils.ImageFilePathUtils">
 		<beans:property name="basePath" value="/static" />
 	</beans:bean>
 	
