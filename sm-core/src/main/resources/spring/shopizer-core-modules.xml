@@ -107,7 +107,7 @@
 						<beans:ref bean="localCacheManager" />
 				</beans:property>
 				<!-- <beans:property name="rootName" value="product-merchant"/> -->
-				<beans:property name="rootName" value="/var/www/sm-shop-static-static"/>
+				<beans:property name="rootName" value="/var/www/sm-shop-static"/>
 	</beans:bean>
 	
 
@@ -133,7 +133,7 @@
 						<beans:ref bean="localCacheManager" />
 				</beans:property>
 				<!-- <beans:property name="rootName" value="store-merchant"/> -->
-				<beans:property name="rootName" value="/var/www/sm-shop-static-static"/>
+				<beans:property name="rootName" value="/var/www/sm-shop-static"/>
 	</beans:bean>
 	
 	
@@ -160,7 +160,7 @@
 			<beans:ref bean="localCacheManager" />
 		</beans:property>
 		<!-- <beans:property name="rootName" value="store-merchant"/> -->
-		<beans:property name="rootName" value="/var/www/sm-shop-static-static/"/>
+		<beans:property name="rootName" value="/var/www/sm-shop-static/"/>
 	</beans:bean>
 	
 	
@@ -187,7 +187,7 @@
 			<beans:ref bean="localCacheManager" />
 		</beans:property>
 		<!-- <beans:property name="rootName" value="product-file"/> -->
-		<beans:property name="rootName" value="/var/www/sm-shop-static-static"/>
+		<beans:property name="rootName" value="/var/www/sm-shop-static"/>
 	</beans:bean>
 	
 
