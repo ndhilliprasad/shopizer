@@ -198,7 +198,7 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 				if(anonymousCustomer==null) {
 					
 					Address address = null;
-					try {
+					/*try {
 						
 						String ipAddress = GeoLocationUtils.getClientIpAddress(request);
 						com.salesmanager.core.model.common.Address geoAddress = customerService.getCustomerAddress(store, ipAddress);
@@ -207,12 +207,12 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 							address.setCountry(geoAddress.getCountry());
 							address.setCity(geoAddress.getCity());
 							address.setZone(geoAddress.getZone());
-							/** no postal code **/
+							*//** no postal code **//*
 							//address.setPostalCode(geoAddress.getPostalCode());
 						}
 					} catch(Exception ce) {
 						LOGGER.error("Cannot get geo ip component ", ce);
-					}
+					}*/
 					
 					if(address==null) {
 						address = new Address();

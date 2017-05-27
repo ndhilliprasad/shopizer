@@ -7,6 +7,9 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.salesmanager.core.business.utils.ProductPriceUtils;
 import com.salesmanager.core.model.common.Delivery;
 import com.salesmanager.core.model.merchant.MerchantStore;
@@ -25,6 +28,8 @@ public class CustomPriceBasedShippingQuote implements ShippingQuoteModule {
 
 	public final static String MODULE_CODE = "priceBased";
 	private final static String PRICE_BASED = "PRICE_BASED";
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(CustomPriceBasedShippingQuote.class);
 
 	@Inject
 	private ProductPriceUtils productPriceUtils;
@@ -58,6 +63,8 @@ public class CustomPriceBasedShippingQuote implements ShippingQuoteModule {
 			try {
 				optionPrice = new BigDecimal(shippingCost);
 			} catch (NumberFormatException exception) {
+				LOGGER.error("Unable to convert the priceBased shipping cost : " + shippingCost + " to Number",
+						exception);
 				optionPrice = new BigDecimal(0);
 			}
 
