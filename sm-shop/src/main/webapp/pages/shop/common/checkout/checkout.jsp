@@ -496,6 +496,9 @@ function bindActions() {
  * Calculates a shipping quote based on customer address
  */
 function shippingQuotes(){
+	
+	//Don't calculate the shipping quote
+	return;
 
 	resetErrorMessage();
 	$('#pageContainer').showLoading();

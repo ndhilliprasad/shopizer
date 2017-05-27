@@ -23,6 +23,7 @@ import com.salesmanager.core.model.payments.BasicPayment;
 import com.salesmanager.core.model.payments.PaypalPayment;
 import com.salesmanager.core.model.payments.Transaction;
 import com.salesmanager.core.model.reference.language.Language;
+import com.salesmanager.core.model.shipping.ShippingQuote;
 import com.salesmanager.core.model.shipping.ShippingSummary;
 import com.salesmanager.core.model.shoppingcart.ShoppingCartItem;
 import com.salesmanager.core.model.system.IntegrationConfiguration;
@@ -138,7 +139,8 @@ public class ShoppingOrderPaymentController extends AbstractController {
 			
 			//validate order first
 			Map<String,String> messages = new TreeMap<String,String>();
-			orderFacade.validateOrder(order, new BeanPropertyBindingResult(order,"order"), messages, store, locale);
+			ShippingQuote shippingQoute = getSessionAttribute(Constants.SHIPPING_QUOTE, request);
+			orderFacade.validateOrder(order, new BeanPropertyBindingResult(order,"order"), shippingQoute, messages, store, locale);
 			
 			if(CollectionUtils.isNotEmpty(messages.values())) {
 				for(String key : messages.keySet()) {

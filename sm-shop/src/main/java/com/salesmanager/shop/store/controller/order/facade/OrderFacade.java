@@ -65,7 +65,8 @@ public interface OrderFacade {
 	 * @return
 	 */
 	ShippingSummary getShippingSummary(ShippingQuote quote, MerchantStore store, Language language);
-	void validateOrder(ShopOrder order, BindingResult bindingResult,
+	
+	void validateOrder(ShopOrder order, BindingResult bindingResult, ShippingQuote shippingQoute,
 			Map<String, String> messagesResult, MerchantStore store,
 			Locale locale) throws ServiceException;
 	

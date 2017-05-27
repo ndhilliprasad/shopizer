@@ -28,6 +28,7 @@
     			<beans:entry key="priceByDistance" value-ref="priceByDistance"/>
     			<beans:entry key="storePickUp" value-ref="storePickUp"/>
     			<beans:entry key="customQuotesRules" value-ref="customShippingPriceModule"/><!--as defined in shopizer-core-rules-->
+    			<beans:entry key="priceBased" value-ref="priceBased"/>
     </util:map>
     
     <!--  Payment integration modules -->
@@ -54,6 +55,8 @@
 		class="com.salesmanager.core.business.modules.integration.shipping.impl.StorePickupShippingQuote"/>
 	<beans:bean id="customShippingPriceModule"
 		class="com.salesmanager.core.business.modules.integration.shipping.impl.CustomShippingQuoteRules"/>
+	<beans:bean id="priceBased"
+		class="com.salesmanager.core.business.modules.integration.shipping.impl.CustomPriceBasedShippingQuote"/>
 	
 	
 	<!--Default packaging-->

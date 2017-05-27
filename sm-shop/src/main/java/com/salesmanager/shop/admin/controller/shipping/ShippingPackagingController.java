@@ -102,10 +102,14 @@ public class ShippingPackagingController {
 		String sweight = df.format(configuration.getBoxWeight());
 		double weight = Double.parseDouble(sweight);
 		
+		String maxWeight = df.format(configuration.getMaxWeight());
+		double maximumWeight = Double.parseDouble(maxWeight);
+		
 		shippingConfiguration.setBoxHeight(configuration.getBoxHeight());
 		shippingConfiguration.setBoxLength(configuration.getBoxLength());
-		shippingConfiguration.setBoxWeight(weight);
 		shippingConfiguration.setBoxWidth(configuration.getBoxWidth());
+		shippingConfiguration.setBoxWeight(weight);
+		shippingConfiguration.setMaxWeight(maximumWeight);
 		
 		shippingConfiguration.setShipPackageType(configuration.getShipPackageType());
 		

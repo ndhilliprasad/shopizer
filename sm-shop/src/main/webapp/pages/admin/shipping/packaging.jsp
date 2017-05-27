@@ -86,7 +86,15 @@
 											<form:input cssClass="input-small" id="boxWeight" path="boxWeight" />
                         				</div>
                         				<span class="help-inline"><form:errors path="boxWeight" cssClass="error" /></span>
-                  					</div>                   					
+                  					</div>
+                  					
+                  					<div class="control-group">
+                        				<label><s:message code="label.shipping.packaging.box.maxweight" text="Maximum Box Weight"/></label>
+                        				<div class="controls">
+											<form:input cssClass="input-small" id="maxWeight" path="maxWeight" />
+                        				</div>
+                        				<span class="help-inline"><form:errors path="maxWeight" cssClass="error" /></span>
+                  					</div>                    					
 									</div>
 
 	                        		<div class="form-actions">
