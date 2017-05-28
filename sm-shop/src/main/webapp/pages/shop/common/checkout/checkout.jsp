@@ -119,29 +119,29 @@ function isFormValid() {
 	$(formErrorMessageId).hide();//reset error message
 	var $inputs = $(checkoutFormId).find(':input');
 	var valid = true;
-	var firstErrorMessage = null;
+	var errorMessage = null;
 	$inputs.each(function() {
 		if($(this).hasClass('required')) {
 			var fieldValid = isCheckoutFieldValid($(this));
-			//log($(this).attr('id') + ' Is valid ' + fieldValid);
-			if(!fieldValid) {
-				if(firstErrorMessage==null) {
-					//log('Title ' + $(this).attr('title'));
-					if($(this).attr('title')) {
-						firstErrorMessage = $(this).attr('title');
-					}
+			
+			if(!fieldValid) {				
+				if($(this).attr('title')) {
+					errorMessage = $(this).attr('title');					
+					$(this).next().text(errorMessage);
 				}
 				valid = false;
+			}else{
+				$(this).next().text('');
 			}
 		}
 		if($(this).hasClass('email')) {	
 			var emailValid = validateEmail($(this).val());
-			//console.log('Email is valid ? ' + emailValid);
-			if(!emailValid) {
-				if(firstErrorMessage==null) {
-					firstErrorMessage = '<s:message code="messages.invalid.email" text="Invalid email address"/>';
-					valid = false;
-				}
+			
+			if(!emailValid) {						
+				$(this).next().text('<s:message code="messages.invalid.email" text="Invalid email address"/>');				
+				valid = false;
+			}else{
+				$(this).next().text(''');
 			}
 		}
 	});
@@ -154,7 +154,7 @@ function isFormValid() {
     }
 	
 	//console.log('Form is valid ? ' + valid);
-	if(valid==false) {//disable submit button
+	/* if(valid==false) {//disable submit button
 		if(firstErrorMessage!=null) {
 			$(formErrorMessageId).addClass('alert-error alert-danger');
 			$(formErrorMessageId).removeClass('alert-success');
@@ -170,7 +170,7 @@ function isFormValid() {
 		$(formErrorMessageId).show();
 		$('#submitOrder').removeClass('btn-disabled');
 		$('#submitOrder').prop('disabled', false);
-	}
+	} */
 	
 	return valid;
 }
@@ -196,7 +196,7 @@ function setPaymentModule(module) {
 	}
 	
 	//TODO set the TAB to the payment type
-	isFormValid();
+	//isFormValid();
 	
 }
 
@@ -268,8 +268,8 @@ function showErrorMessage(message) {
 	
 	
 	showResponseErrorMessage(message);
-	$('#submitOrder').addClass('btn-disabled');
-	$('#submitOrder').prop('disabled', true);
+	//$('#submitOrder').addClass('btn-disabled');
+	//$('#submitOrder').prop('disabled', true);
 	
 	$(formErrorMessageId).addClass('alert-error alert-danger');
 	$(formErrorMessageId).removeClass('alert-success');
@@ -337,7 +337,7 @@ function getZones(listDiv, textDiv, countryCode, defaultValue, callBackFunction)
 				$(listDiv).hide();             
 				$(textDiv).show();
 			}
-			isFormValid();
+			//isFormValid();
 			if(callBackFunction!=null) {
 				callBackFunction();
 			}
@@ -396,15 +396,15 @@ function bindActions() {
 	bindCalculateShipping();
 	
 	$("input[type='text']").on("change keyup paste", function(){
-		isFormValid();
+		//isFormValid();
 	});
 	
 	$("input[type='checkbox']").on("change click", function(){
-		isFormValid();
+		//isFormValid();
 	});
 	
    	$('input[name=paymentMethodType]', checkoutFormId).click(function() {
-    	isFormValid();//change payment method
+    	//isFormValid();//change payment method
     });
     
     $("#billingStateList").change(function() {
@@ -432,16 +432,22 @@ function bindActions() {
     	shippingQuotes();	
     	if ($('#shipToBillingAdress').is(':checked')) {
     		$('#deliveryBox').hide();
-    		isFormValid();
+    		//isFormValid();
     	} else {
     		$('#deliveryBox').show();
-    		isFormValid();
+    		//isFormValid();
     	}
     });
     
 	$("#submitOrder").click(function(e) {
 		e.preventDefault();//do not submit form
+		
 		formValid = isFormValid();
+		
+		if(!formValid){
+			return;
+		}
+			
 		resetErrorMessage();
 		setCountrySettings('billing',$('.billing-country-list').val());
 		setCountrySettings('delivery',$('.shipping-country-list').val());
@@ -788,7 +794,7 @@ function calculateTotal(){
 			//console.log(rendered);
 			$('#summaryRows').append(subTotalsRendered);
 			$('#totalRow').html(totalRendred);
-			formValid = isFormValid();
+			//formValid = isFormValid();
 			validateConfirmShipping(response);
 	  },
 	    error: function(xhr, textStatus, errorThrown) {
@@ -810,7 +816,7 @@ $(document).ready(function() {
 		<!-- 
 			//can use masked input for phone (USA - CANADA)
 		-->
-		formValid = isFormValid();
+		//formValid = isFormValid();
 		
 		setPaymentModule('${order.defaultPaymentMethodCode}')
 
@@ -982,7 +988,20 @@ $(document).ready(function() {
 									    					</div> 
 									  				   </div> 
 													</div>
+													
 													<div class="span4 col-md-4">
+														<div class="control-group form-group"> 
+															<label><s:message code="label.generic.phone" text="Phone number"/></label>
+											    				<div class="controls"> 
+											    					<s:message code="NotEmpty.customer.billing.phone" text="Phone number is required" var="msgPhone"/>
+											      					<form:input id="customer.billing.phone" cssClass="input-large required billing-phone form-control form-control-lg" path="customer.billing.phone" title="${msgPhone}"/>
+											      					<form:errors path="customer.billing.phone" cssClass="error" />
+													    			<span id="error-customer.billing.phone" class="error"></span> 
+											    				</div> 
+											  			</div>
+										  			</div>
+										  			
+													<%-- <div class="span4 col-md-4">
 									  				   <div class="control-group form-group"> 
 														<label><s:message code="label.customer.billing.company" text="Billing company"/></label>
 									    					<div class="controls"> 
@@ -991,7 +1010,7 @@ $(document).ready(function() {
 												    			<span id="error-customer.billing.company" class="error"></span>
 									    					</div> 
 									  				   </div> 
-													</div>
+													</div> --%>
 											</div>
 					
 											<!--  street address -->
@@ -1037,46 +1056,32 @@ $(document).ready(function() {
 										   
 										   <!-- state province -->
 										   <div class="row-fluid common-row row">
-										   			<div class="span8 col-md-8">
-										   			<div class="control-group form-group"> 
-														<label><s:message code="label.generic.stateprovince" text="State / Province"/></label>
-											    		<div class="controls"> 
-												       			<form:select cssClass="zone-list form-control form-control-lg" id="billingStateList" path="customer.billing.zone"/>
-											                    <s:message code="NotEmpty.customer.billing.stateProvince" text="State / Province is required" var="msgStateProvince"/>
-											                    <form:input  class="input-large required form-control form-control-lg" id="billingStateProvince"  maxlength="100" name="billingStateProvince" path="customer.billing.stateProvince" title="${msgStateProvince}"/>
-											                    <form:errors path="customer.billing.stateProvince" cssClass="error" />
-												    			<span id="error-customer.billing.stateProvince" class="error"></span> 
-											    		</div> 
+										   			<div class="span4 col-md-4">
+											   			<div class="control-group form-group"> 
+															<label><s:message code="label.generic.stateprovince" text="State / Province"/></label>
+												    		<div class="controls"> 
+													       			<form:select cssClass="zone-list form-control form-control-lg" id="billingStateList" path="customer.billing.zone"/>
+												                    <%-- <s:message code="NotEmpty.customer.billing.stateProvince" text="State / Province is required" var="msgStateProvince"/>
+												                    <form:input  class="input-large required form-control form-control-lg" id="billingStateProvince"  maxlength="100" name="billingStateProvince" path="customer.billing.stateProvince" title="${msgStateProvince}"/>
+												                    <form:errors path="customer.billing.stateProvince" cssClass="error" />
+													    			<span id="error-customer.billing.stateProvince" class="error"></span>  --%>
+												    		</div> 
+												  		</div>
 											  		</div>
-											  		</div>
+											  		
+											  		<div class="span4 col-md-4">
+											  			<div class="control-group form-group"> 
+															<label><s:message code="label.generic.country" text="Country"/></label>
+											    				<div class="controls"> 
+											       					<form:select cssClass="billing-country-list form-control form-control-lg" path="customer.billing.country">
+												  							<form:options items="${countries}" itemValue="isoCode" itemLabel="name"/>
+											       					</form:select>
+											    				</div> 
+											  			</div>
+										  			</div>
 										   </div>
 								
-										  <!-- country - phone - ship checkbox -->
-									       <div class="row-fluid common-row row">
-									       			<div class="span4 col-md-4">
-										  			<div class="control-group form-group"> 
-														<label><s:message code="label.generic.country" text="Country"/></label>
-										    				<div class="controls"> 
-										       					<form:select cssClass="billing-country-list form-control form-control-lg" path="customer.billing.country">
-											  							<form:options items="${countries}" itemValue="isoCode" itemLabel="name"/>
-										       					</form:select>
-										    				</div> 
-										  			</div>
-										  			</div>
-											
-													<div class="span4 col-md-4">
-										  			<div class="control-group form-group"> 
-														<label><s:message code="label.generic.phone" text="Phone number"/></label>
-										    				<div class="controls"> 
-										    					<s:message code="NotEmpty.customer.billing.phone" text="Phone number is required" var="msgPhone"/>
-										      					<form:input id="customer.billing.phone" cssClass="input-large required billing-phone form-control form-control-lg" path="customer.billing.phone" title="${msgPhone}"/>
-										      					<form:errors path="customer.billing.phone" cssClass="error" />
-												    			<span id="error-customer.billing.phone" class="error"></span> 
-										    				</div> 
-										  			</div>
-										  			</div>
-													
-									  	  </div>
+										  <!-- ship checkbox -->
 									  	  
 									  	  <c:if test="${shippingQuote!=null}">
 											<!-- display only if a shipping quote exist -->
@@ -1105,27 +1110,29 @@ $(document).ready(function() {
 									  				   <div class="control-group form-group"> 
 														<label><s:message code="label.customer.shipping.firstname" text="Shipping first name"/></label>
 									    					<div class="controls"> 
-									    					<s:message code="NotEmpty.customer.shipping.firstName" text="Shipping first name should not be empty" var="msgShippingFirstName"/>
-									      					<form:input id="customer.delivery.name" cssClass="input-xxlarge required form-control form-control-lg" path="customer.delivery.firstName" title="${msgShippingFirstName}"/>
+									    					<s:message code="NotEmpty.customer.shipping.firstName" text="Shipping first name is reqired" var="msgShippingFirstName"/>
+									      					<form:input id="customer.delivery.name" cssClass="input-large required form-control form-control-lg" path="customer.delivery.firstName" title="${msgShippingFirstName}"/>
+									      					<form:errors path="customer.delivery.firstName" cssClass="error" />
+												    		<span id="error-customer.delivery.firstName" class="error"></span>
 									    					</div> 
 									  				   </div> 
 													</div>
-											</div>
-
-											<div class="row-fluid common-row row">
+													
 													<div class="span4 col-md-4">
 									  				   <div class="control-group form-group"> 
 														<label><s:message code="label.customer.shipping.lastname" text="Shipping last name"/></label>
 									    					<div class="controls"> 
-									    					<s:message code="NotEmpty.customer.shipping.lastName" text="Shipping last name should not be empty" var="msgShippingLastName"/>
-									      					<form:input id="customer.delivery.name" cssClass="input-xxlarge required form-control form-control-lg" path="customer.delivery.lastName" title="${msgShippingLastName}"/>
+									    					<s:message code="NotEmpty.customer.shipping.lastName" text="Shipping last name is reqired" var="msgShippingLastName"/>
+									      					<form:input id="customer.delivery.name" cssClass="input-large required form-control form-control-lg" path="customer.delivery.lastName" title="${msgShippingLastName}"/>
+									    					<form:errors path="customer.delivery.lastName" cssClass="error" />
+												    		<span id="error-customer.delivery.lastName" class="error"></span>
 									    					</div> 
 									  				   </div> 
 													</div>
-											</div>					
+											</div>				
 					
 											<!-- company -->
-											<div class="row-fluid common-row row">
+											<%-- <div class="row-fluid common-row row">
 												<div class="span4 col-md-4">
 									  				   <div class="control-group form-group"> 
 														<label><s:message code="label.customer.shipping.company" text="Shipping company"/></label>
@@ -1134,7 +1141,7 @@ $(document).ready(function() {
 									    					</div> 
 									  				   </div>
 									  			</div> 
-											</div>
+											</div> --%>
 					
 											<!--  street address -->
 											<div class="row-fluid common-row row">
@@ -1142,8 +1149,10 @@ $(document).ready(function() {
 										  			<div class="control-group form-group"> 
 														<label><s:message code="label.customer.shipping.streetaddress" text="Shipping street address"/></label>
 										    				<div class="controls"> 
-										    					<s:message code="NotEmpty.customer.shipping.address" text="Shipping street address should not be empty" var="msgShippingAddress"/>
+										    					<s:message code="NotEmpty.customer.shipping.address" text="Shipping street address is reqired" var="msgShippingAddress"/>
 										      					<form:input id="customer.delivery.address" cssClass="input-xxlarge required form-control form-control-lg" path="customer.delivery.address" title="${msgShippingAddress}"/>
+										    					<form:errors path="customer.delivery.address" cssClass="error" />
+												    			<span id="error-customer.delivery.address" class="error"></span>
 										    				</div> 
 										  			</div> 
 										  		</div>
@@ -1155,8 +1164,10 @@ $(document).ready(function() {
 											  			<div class="control-group form-group"> 
 															<label><s:message code="label.customer.shipping.city" text="Shipping city"/></label>
 											    				<div class="controls">
-											    					<s:message code="NotEmpty.customer.shipping.city" text="Shipping city should not be empty" var="msgShippingCity"/> 
+											    					<s:message code="NotEmpty.customer.shipping.city" text="Shipping city is reqired" var="msgShippingCity"/> 
 											      					<form:input id="customer.delivery.city" cssClass="input-large required form-control form-control-lg" path="customer.delivery.city" title="${msgShippingCity}"/>
+											    					<form:errors path="customer.delivery.city" cssClass="error" />
+												    				<span id="error-customer.delivery.city" class="error"></span>
 											    				</div> 
 											  			</div>
 													</div>
@@ -1164,40 +1175,40 @@ $(document).ready(function() {
 											  			<div class="control-group form-group"> 
 															<label><s:message code="label.customer.shipping.postalcode" text="Shipping postal code"/></label>
 											    				<div class="controls"> 
-											    				    <s:message code="NotEmpty.customer.shipping.postalCode" text="Shipping postal code should not be empty" var="msgShippingPostal"/>
+											    				    <s:message code="NotEmpty.customer.shipping.postalCode" text="Shipping postal code is reqired" var="msgShippingPostal"/>
 											      					<form:input id="deliveryPostalCode" cssClass="input-large required delivery-postalCode form-control form-control-lg" path="customer.delivery.postalCode" title="${msgShippingPostal}"/>
+											    					<form:errors path="customer.delivery.postalCode" cssClass="error" />
+												    				<span id="error-customer.delivery.postalCode" class="error"></span>
 											    				</div> 
 											  			</div>
 													</div>
 										   </div>
 										   
-										   <!-- state province -->
+										   <!-- state province  and country -->
 										   <div class="row-fluid common-row row">
-										   			<div class="span8 col-md-8">
-										   			<div class="control-group form-group"> 
-														<label><s:message code="label.customer.shipping.zone" text="Shipping state / province"/></label>
-											    		<div class="controls"> 
-												       			<form:select cssClass="zone-list form-control" id="deliveryStateList" path="customer.delivery.zone"/>
-											                    <s:message code="NotEmpty.customer.shipping.stateProvince" text="Shipping State / Province is required" var="msgShippingState"/>
-											                    <form:input  class="input-large required form-control form-control-lg" id="deliveryStateProvince"  maxlength="100" name="shippingStateProvince" path="customer.delivery.stateProvince" title="${msgShippingState}"/> 
-											    		</div> 
+										   			<div class="span4 col-md-4">
+											   			<div class="control-group form-group"> 
+															<label><s:message code="label.customer.shipping.zone" text="Shipping state / province"/></label>
+												    		<div class="controls"> 
+													       			<form:select cssClass="zone-list form-control" id="deliveryStateList" path="customer.delivery.zone"/>
+												                    <%-- <s:message code="NotEmpty.customer.shipping.stateProvince" text="Shipping State / Province is required" var="msgShippingState"/>
+												                    <form:input  class="input-large required form-control form-control-lg" id="deliveryStateProvince"  maxlength="100" name="shippingStateProvince" path="customer.delivery.stateProvince" title="${msgShippingState}"/> --%> 
+												    		</div> 
+												  		</div>
 											  		</div>
-											  		</div>
+											  		
+											  		<div class="span4 col-md-4">
+											  			<div class="control-group form-group"> 
+															<label><s:message code="label.customer.shipping.country" text="Shipping country"/></label>
+											    				<div class="controls"> 
+											       					<form:select cssClass="shipping-country-list form-control" path="customer.delivery.country">
+												  							<form:options items="${countries}" itemValue="isoCode" itemLabel="name"/>
+											       					</form:select>
+											    				</div> 
+											  			</div>
+										  			</div>
 										   </div>
 								
-										  <!-- country -->
-									       <div class="row-fluid common-row row">
-									       			<div class="span8 col-md-8">
-										  			<div class="control-group form-group"> 
-														<label><s:message code="label.customer.shipping.country" text="Shipping country"/></label>
-										    				<div class="controls"> 
-										       					<form:select cssClass="shipping-country-list form-control" path="customer.delivery.country">
-											  							<form:options items="${countries}" itemValue="isoCode" itemLabel="name"/>
-										       					</form:select>
-										    				</div> 
-										  			</div>
-										  			</div>
-									  	  </div>
 									</div>
 									</c:if>
 									
@@ -1211,7 +1222,7 @@ $(document).ready(function() {
 									<!-- Shipping -->
 									<div class="checkout-box">
 										<span class="box-title">
-												<p class="p-title"><s:message code="label.shipping.fees" text="Shipping fees" /> </p>
+												<p class="p-title"><s:message code="label.shipping.fees" text="Delivery Charges" /> </p>
 										</span>
 
 								        <c:choose>
@@ -1219,15 +1230,15 @@ $(document).ready(function() {
 								        	<input type="hidden" id="shippingModule" name="shippingModule" value="${shippingQuote.shippingModuleCode}">
 									        <div id="shippingSection" class="control-group"> 
 							 					<label class="control-label">
-							 						<s:message code="label.shipping.options" text="Shipping options"/>
+							 						<!--<s:message code="label.shipping.options" text="Shipping options"/>-->
 							 						<c:if test="${shippingQuote.handlingFees!=null && shippingQuote.handlingFees>0}">
 								       					&nbsp;(<s:message code="label.shipping.handlingfees" text="Handling fees" />&nbsp;<sm:monetary value="${shippingQuote.handlingFees}"/>)
 								       				</c:if>
 							 					</label> 
 							 					<div id="shippingOptions" class="controls"> 
-							 						<c:if test="${shippingQuote.shippingReturnCode=='NO_POSTAL_CODE'}">
+							 						<c:if test="${!shippingQuote.freeShipping && shippingQuote.freeShippingAmount!=null}">
 							 								<strong>
-									       						<s:message code="label.shipping.nopostalcode" text="A shipping quote will be available after filling the postal code"/>
+									       						<s:message code="label.shipping.freeshipping.over" text="Free shipping for orders over"/>&nbsp;<strong><sm:monetary value="${shippingQuote.freeShippingAmount}"/></strong>
 									       					</strong>
 							 						</c:if>
 							 						<c:forEach items="${shippingQuote.shippingOptions}" var="option" varStatus="status">
@@ -1245,7 +1256,9 @@ $(document).ready(function() {
 								       	<c:otherwise>
 								       		<c:choose>
 								       			<c:when test="${shippingQuote.freeShipping==true && shippingQuote.freeShippingAmount!=null}" >
-								       				<s:message code="label.shipping.freeshipping.over" text="Free shipping for orders over"/>&nbsp;<strong><sm:monetary value="${shippingQuote.freeShippingAmount}"/></strong>
+								       				<strong>
+							       						<s:message code="label.shipping.freeshipping.over" text="Free shipping for orders over"/>&nbsp;<strong><sm:monetary value="${shippingQuote.freeShippingAmount}"/></strong>
+							       					</strong>
 								       			</c:when>
 								       			<c:otherwise>
 								       				<c:choose>
@@ -1472,8 +1485,8 @@ $(document).ready(function() {
 										<div class="form-actions">
 											<div class="pull-right"> 
 												<button id="submitOrder" type="button" class="btn btn-large btn-success 
-												<c:if test="${errorMessages!=null}"> btn-disabled</c:if>" 
-												<c:if test="${errorMessages!=null}"> disabled="true"</c:if>
+												<%-- <c:if test="${errorMessages!=null}"> btn-disabled</c:if> --%>" 
+												<%-- <c:if test="${errorMessages!=null}"> disabled="true"</c:if> --%>
 												><s:message code="button.label.submitorder" text="Submit order"/></button>
 			
 												<!-- submit can be a post or a pre ajax query -->

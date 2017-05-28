@@ -475,11 +475,12 @@ public class ShippingServiceImpl implements ShippingService {
 			//free shipping ?
 			if(shippingConfiguration.isFreeShippingEnabled()) {
 				BigDecimal freeShippingAmount = shippingConfiguration.getOrderTotalFreeShipping();
+				shippingQuote.setFreeShippingAmount(freeShippingAmount);
 				if(freeShippingAmount!=null) {
 					if(orderTotal.doubleValue()>freeShippingAmount.doubleValue()) {
 						if(shippingConfiguration.getFreeShippingType() == ShippingType.NATIONAL) {
 							if(store.getCountry().getIsoCode().equals(shipCountry.getIsoCode())) {
-								shippingQuote.setFreeShipping(true);
+								shippingQuote.setFreeShipping(true);	
 								shippingQuote.setFreeShippingAmount(freeShippingAmount);
 								return shippingQuote;
 							}
