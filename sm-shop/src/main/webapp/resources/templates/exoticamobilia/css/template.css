@@ -96,13 +96,14 @@
 }
 
 .store-name { 
-	font: 22px "SalarymanRegular",Arial,sans-serif;
+	font: 30px "SalarymanRegular",Arial,sans-serif;
     letter-spacing: -1px;
+    white-space: nowrap
 }
 	
 a.grey:hover, a.grey:visited, a.grey:link, a.grey:active {
     text-decoration: none !important;
-    color:#666666 !important;
+    color:#fafafa !important;
 }
 
 a.white:hover, a.white:visited, a.white:link, a.white:active {
@@ -974,4 +975,8 @@ fieldset {
 
 .row-cart {
     margin-left: -15px;
+}
+
+div.logo {
+	margin-top: 10px;
 }

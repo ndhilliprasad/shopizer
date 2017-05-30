@@ -165,7 +165,7 @@ $(document).ready(function() {
 
 <!-- Customer account menu logged in customer -->
 <script type="text/html" id="customerLoggedInAccountTemplate">
-		<button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user no-desktop"></i> <span class="uppercase"><s:message code="label.generic.welcome" text="Welcome" /> <span class="no-responsive">{{firstName}}</span></span></button>
+		<button type="button" class="btn dropdown-toggle" data-toggle="dropdown"> <span class="uppercase"><s:message code="label.generic.welcome" text="Welcome" /> <span class="no-responsive">{{firstName}}</span></span></button>
 		<ul class="dropdown-menu dropdown-menu-right dropdown-animation">
 				<li>
 					<a onClick="javascript:location.href='<c:url value="/shop/customer/dashboard.html" />';" href="#"><i class="fa fa-user"></i><s:message code="label.customer.myaccount" text="My account"/></a>
@@ -178,7 +178,7 @@ $(document).ready(function() {
 
 <!-- Customer account menu not logged in customer -->
 <script type="text/html" id="customerNotLoggedInAccountTemplate">
-		<button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user no-desktop"></i><span class="uppercase"> <s:message code="button.label.signin" text="Signin"/></span></button>
+		<button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><span class="uppercase"> <s:message code="button.label.signin" text="Signin"/></span></button>
 		<!-- Absolutely need to have the following id signinPane -->
         <ul id="signinPane" class="dropdown-menu dropdown-menu-right dropdown-animation">
 			<li>
@@ -207,7 +207,7 @@ $(document).ready(function() {
 
 		<!-- header-top start (Add "dark" class to .header-top in order to enable dark header-top e.g <div class="header-top dark">) -->
 	    <!-- ================ -->
-	    <div class="header-top">
+	    <div class="header-top dark">
             <div class="container">
                 <div class="row">
                     <div class="col-xs-2 col-sm-2">
@@ -215,7 +215,7 @@ $(document).ready(function() {
 					   <!-- ================ -->
 					   <div class="header-top-first clearfix">
 					       <!-- social links -->
-					       <c:if test="${requestScope.CONFIGS['facebook_page_url'] != null || requestScope.CONFIGS['twitter_handle'] != null || requestScope.CONFIGS['pinterest'] != null || requestScope.CONFIGS['instagram'] != null}">
+					       <%-- <c:if test="${requestScope.CONFIGS['facebook_page_url'] != null || requestScope.CONFIGS['twitter_handle'] != null || requestScope.CONFIGS['pinterest'] != null || requestScope.CONFIGS['instagram'] != null}">
 						   <ul class="social-links clearfix hidden-xs">
 						       <c:if test="${requestScope.CONFIGS['twitter_handle'] != null}">
 							   <li class="twitter"><a target="_blank" href="<c:out value="${requestScope.CONFIGS['twitter_handle']}"/>"><i class="fa fa-twitter"></i></a></li>
@@ -249,7 +249,35 @@ $(document).ready(function() {
 							   </c:if>
 							</ul>
 							   </div>
-						   </div>
+						   </div> --%>
+						   
+						   <div class="header-left clearfix" id="site-branding">
+								<c:choose>
+									<c:when test="${requestScope.CONTENT['logo']!=null}">
+										<!-- A content logo exist -->
+										<sm:pageContent contentCode="logo"/>
+									</c:when>
+									<c:otherwise>
+										<c:choose>
+						                		<c:when test="${not empty requestScope.MERCHANT_STORE.storeLogo}">
+						                			<!--  use merchant store logo -->
+						                			<img class="logoImage" src="<sm:storeLogo/>"/>
+						                		</c:when>
+						                		<c:otherwise>
+						                			<!-- Use store name -->
+						                			<div class="logo">
+						                			
+						                			<a class="grey store-name" href="<c:url value="/shop/"/>">
+						                				<c:out value="${requestScope.MERCHANT_STORE.storename}"/>
+						                			</a>
+						                			</div>
+						                		</c:otherwise>
+						                </c:choose>
+									</c:otherwise>
+								</c:choose>
+								
+							</div>
+						   
                         </div>
 						<!-- header-top-first end -->
                      </div>
@@ -321,33 +349,7 @@ $(document).ready(function() {
 
 							<!-- header-left start -->
 							<!-- ================ -->
-							<div class="header-left clearfix" id="site-branding">
-								<c:choose>
-									<c:when test="${requestScope.CONTENT['logo']!=null}">
-										<!-- A content logo exist -->
-										<sm:pageContent contentCode="logo"/>
-									</c:when>
-									<c:otherwise>
-										<c:choose>
-						                		<c:when test="${not empty requestScope.MERCHANT_STORE.storeLogo}">
-						                			<!--  use merchant store logo -->
-						                			<img class="logoImage" src="<sm:storeLogo/>"/>
-						                		</c:when>
-						                		<c:otherwise>
-						                			<!-- Use store name -->
-						                			<div class="logo">
-						                			<h1>
-						                			<a class="grey store-name" href="<c:url value="/shop/"/>">
-						                				<c:out value="${requestScope.MERCHANT_STORE.storename}"/>
-						                			</a>  
-						                			</h1>
-						                			</div>
-						                		</c:otherwise>
-						                </c:choose>
-									</c:otherwise>
-								</c:choose>
-								
-							</div>
+
 							<!-- header-left end -->
 
 						</div>

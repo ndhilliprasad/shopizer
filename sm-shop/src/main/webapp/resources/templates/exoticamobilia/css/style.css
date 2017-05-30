@@ -317,7 +317,7 @@ tbody {
 	box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.03) inset;
 }
 .header-top.dark {
-	background-color: #27272A;
+	background-color: #232f3e;
 	border-bottom: 1px solid #000000;
 	color: #cdcdcd;
 }
@@ -4751,7 +4751,7 @@ footer:not(.light) .footer-content .tag a,
 	padding: 8px 10px;
 	margin: 0;
 	font-size: 12px;
-	color: #999;
+	color: #fafafa;
 	text-align: center;
 	min-width: 0;
 	background-color: transparent;

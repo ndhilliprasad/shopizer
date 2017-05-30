@@ -69,7 +69,7 @@ function isEmail(email) {
 	  <!-- footer -->
       <footer id="footer">
             
-            <div class="footer">
+            <%-- <div class="footer">
             
         		<div id="footer-section" class="container">
         
@@ -146,8 +146,8 @@ function isEmail(email) {
 
              <div class="footer-content">
             <c:if test="${not empty  requestScope.TOP_CATEGORIES}">
-            <%-- a verifier top categories EN/FR --%>
-			<%-- <p class="lead">Top categories</p> --%>
+            a verifier top categories EN/FR
+			<p class="lead">Top categories</p>
 			<ul class="nav nav-pills nav-stacked">  
 			                <li class="<sm:activeLink linkCode="HOME" activeReturnCode="active"/>">
 										<a href="<c:url value="/shop"/>"><s:message code="menu.home" text="Home"/></a>
@@ -201,7 +201,7 @@ function isEmail(email) {
             
          </div>   
        </div>
-       </div>
+       </div> --%>
   
 		<div class="subfooter">
 				<div class="container">
